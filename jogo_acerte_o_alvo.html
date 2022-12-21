@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Acerte o alvo!</title>
+    </head>
+    <body>
+
+        <h1>Você consegue acertar o alvo ?</h1>
+        <h2>Teste sua mira e o veja mudar de cor!</h2>
+        <canvas width="600" height="400"></canvas>
+
+        <script>
+            let tela = document.querySelector('canvas');
+            let pincel = tela.getContext('2d');
+
+            pincel.fillStyle = 'lightgray';
+            pincel.fillRect(0, 0, 600, 400);
+
+            function desenhaAlvo () {
+                limpaTela();
+                coordenadasAleatorias();
+                pincel.fillStyle = cores[cor];
+                pincel.beginPath();
+                pincel.arc(alvoX, alvoY, 30, 0, 2 * Math.PI);
+                pincel.fill();
+
+                pincel.fillStyle = 'white';
+                pincel.beginPath();
+                pincel.arc(alvoX, alvoY, 20, 0, 2 * Math.PI);
+                pincel.fill();
+
+                pincel.fillStyle = cores[cor];
+                pincel.beginPath();
+                pincel.arc(alvoX, alvoY, 10, 0, 2 * Math.PI);
+                pincel.fill();
+            }
+
+            function coordenadasAleatorias () {
+                let testeX = false;
+                let testeY = false;
+                while (testeX === false) {
+                    alvoX = Math.random() * 1000;
+                    if (alvoX > 30 && alvoX < (600 - 30)) {
+                        testeX = true;
+                    }
+                }
+                while (testeY === false) {
+                    alvoY = Math.random() * 1000;
+                    if (alvoY > 30 && alvoY < (400 - 30)) {
+                        testeY = true;
+                    }
+                }
+            }
+
+            function limpaTela () {
+                pincel.clearRect(0, 0, 600, 400);
+                pincel.fillStyle = 'lightgray';
+                pincel.fillRect(0, 0, 600, 400);
+            }
+
+            function tiro (evento) {
+                tiroX = evento.pageX - tela.offsetLeft;
+                tiroY = evento.pageY - tela.offsetTop;
+                validaAcerto();
+            }
+
+            function validaAcerto () {
+                if ((tiroX < (alvoX + 10) && tiroX > (alvoX - 10)) && (tiroY < (alvoY + 10) && tiroY > (alvoY - 10))) {
+                    console.log('ACERTOU!!!');
+                    cor++;
+                    if (cor > 5) {
+                        cor = 0;
+                    }
+                } else {
+                    console.log('ERROU!!!');
+                }
+            }
+
+            let alvoX = 0;
+            let alvoY = 0;
+            let tiroX = 0;
+            let tiroY = 0;
+            let cor = 0;
+            let cores = ['red', 'blue', 'yellow', 'orange', 'green', 'purple'];
+
+            setInterval(desenhaAlvo, 1000);
+
+            tela.onclick = tiro;
+        </script>
+    </body>
+</html>
