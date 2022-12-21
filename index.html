@@ -19,26 +19,23 @@
             pincel.fillStyle = 'lightgray';
             pincel.fillRect(0, 0, 600, 400);
 
-            function desenhaAlvo () {
-                limpaTela();
-                coordenadasAleatorias();
-                pincel.fillStyle = cores[cor];
+            function desenhaCirculo(raio, cor) {
+                pincel.fillStyle = cor;
                 pincel.beginPath();
-                pincel.arc(alvoX, alvoY, 30, 0, 2 * Math.PI);
-                pincel.fill();
-
-                pincel.fillStyle = 'white';
-                pincel.beginPath();
-                pincel.arc(alvoX, alvoY, 20, 0, 2 * Math.PI);
-                pincel.fill();
-
-                pincel.fillStyle = cores[cor];
-                pincel.beginPath();
-                pincel.arc(alvoX, alvoY, 10, 0, 2 * Math.PI);
+                pincel.arc(alvoX, alvoY, raio, 0, 2 * Math.PI);
                 pincel.fill();
             }
+            
+            function desenhaAlvo() {
+                limpaTela();
+                coordenadasAleatorias();
 
-            function coordenadasAleatorias () {
+                desenhaCirculo(raio + 20, cores[cor]);
+                desenhaCirculo(raio + 10, 'white');
+                desenhaCirculo(raio, cores[cor]);
+            }
+
+            function coordenadasAleatorias() {
                 let testeX = false;
                 let testeY = false;
                 while (testeX === false) {
@@ -55,19 +52,19 @@
                 }
             }
 
-            function limpaTela () {
+            function limpaTela() {
                 pincel.clearRect(0, 0, 600, 400);
                 pincel.fillStyle = 'lightgray';
                 pincel.fillRect(0, 0, 600, 400);
             }
 
-            function tiro (evento) {
+            function tiro(evento) {
                 tiroX = evento.pageX - tela.offsetLeft;
                 tiroY = evento.pageY - tela.offsetTop;
                 validaAcerto();
             }
 
-            function validaAcerto () {
+            function validaAcerto() {
                 if ((tiroX < (alvoX + 10) && tiroX > (alvoX - 10)) && (tiroY < (alvoY + 10) && tiroY > (alvoY - 10))) {
                     console.log('ACERTOU!!!');
                     cor++;
@@ -81,6 +78,7 @@
 
             let alvoX = 0;
             let alvoY = 0;
+            let raio = 10;
             let tiroX = 0;
             let tiroY = 0;
             let cor = 0;
