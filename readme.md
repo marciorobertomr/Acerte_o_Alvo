@@ -29,10 +29,10 @@ O projeto foi desenvolvido com o objetivo de desafiar o usuário acertar o centr
 
 ### Funcionamento
 
-O alvo fica mudando de posição dentro do quadro definido, a cada intervalor de tempo, desafiando o usuário. Caso o mesmo o acerte no centro, o alvo muda de cor.
+O alvo fica mudando de posição dentro do quadro definido, a cada intervalo de tempo, desafiando o usuário. Caso o mesmo o acerte no centro, o alvo muda de cor.
 
 ### Melhorias
 
-Em comparação ao projeto original visto na Programa One, foi adicionada a seguinte melhoria:
+Em comparação ao projeto original desenvolvimento durante o Programa One, foi adicionada a seguinte melhoria:
 
 - Contador da quantidade de acertos na mesma sessão de página.
