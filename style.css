@@ -1,0 +1,10 @@
+body {
+    text-align: center;
+
+    background-color: rgb(43, 41, 41);
+    color: white;
+}
+
+div, canvas {
+    margin-top: 1.5em;
+}
